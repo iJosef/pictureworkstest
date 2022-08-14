@@ -18,8 +18,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/user/{id}', [UserController::class, 'index']);
+Route::get('/user/add-comment', [UserController::class, 'addComment']);
 
-Route::post('/user/comment/form', [UserController::class, 'userCommentForm']);
+Route::post('user/comment/form', [UserController::class, 'userCommentForm'])->name('append_user_comment');
+
+Route::get('/user/{id}', [UserController::class, 'index'])->name('show_user');
 
 
