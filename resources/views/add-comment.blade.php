@@ -13,6 +13,7 @@
 <div id="wrapper">
     <section id="main">
         <header>
+            @include('errors.list')
             <form action="{{ url('/user/comment/form') }}" method="POST">
                 @csrf
                 <div class="form-group">

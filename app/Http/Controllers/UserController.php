@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AppendCommentRequest;
 use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -20,10 +22,12 @@ class UserController extends Controller
         return view('index', compact('user'));
     }
 
-    public function userCommentForm(Request $request)
+    public function userCommentForm(AppendCommentRequest $request)
     {
+        $validator = $request->validated();
+
         $user = User::findOrFail($request->id);
-        if ($request->password === $user->password) {
+        if (strtoupper($request->password) === $user->password) {
             $comment = Comment::where('user_id', $request->id)->first();
             $current_comment = $comment->comment;
             $new_comment = $current_comment ." ". $request->comment;
@@ -34,11 +38,15 @@ class UserController extends Controller
                 return redirect()->back()->withInput();
             }
 
+        } else {
+            return redirect()->back()->withErrors($validator)->withInput();
         }
     }
 
-    public function userCommentJson(Request $request)
+    public function userCommentJson(AppendCommentRequest $request)
     {
+        $request->validated();
+
         $user = User::findOrFail($request->id);
 
         if ($request->password === $user->password) {
@@ -66,5 +74,7 @@ class UserController extends Controller
             ];
             return response()->json($data, 400);
         }
+
+        // return response()->json($d, 200, $headers);
     }
 }
