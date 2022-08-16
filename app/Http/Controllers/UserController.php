@@ -24,7 +24,7 @@ class UserController extends Controller
 
     public function userCommentForm(AppendCommentRequest $request)
     {
-        $validator = $request->validated();
+        $validator = $request->validated()->withInput();
 
         $user = User::where('id',$request->id)->first();
 
