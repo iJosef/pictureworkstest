@@ -1,64 +1,69 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Pictureworks Laravel Coding Test
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Introduction
 
-## About Laravel
+Migration of a non-OO legacy application, including all logic, behavior and workflows, into a Laravel/Eloquent framework with working data persistency with a database.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Table of Contents
+1. <a href="#how-it-works">How it works</a>
+2. <a href="#technology-stack">Technology Stack</a>
+3. <a href="#functionalities">Functionalities</a>
+4. <a href="#routes">Routes</a>
+5. <a href="#setup">Setup</a>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+## Technology Stack
+  - [PHP](https://www.php.net)
+  - [Laravel](https://laravel.com)
+  - [PostgreSQL](https://www.postgresql.org/)
+  ### Testing tools
+  - [PHPUnit](https://phpunit.de) 
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Functionalities
+* GET user's comment based on URL params
+* POST user's comment from form fields to append to existing comment by same user
+* POST user's comment through JSON object to append to existing comment by same user
+* Command line execution to append comment to user's existing comment.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Routes
 
-## Laravel Sponsors
+### Base URL = http://127.0.0.1:8000/
+Available routes and guide
+Method | Route | Description | Payload
+--- | --- | ---|---
+`GET` | `/user/add-comment` | form view to append comment to existing comment | 
+`POST` | `/user/comment/form` | append comment to existing comment through form view | id, password and comment
+`GET` | `/user/{id}` | view appended comments on a single user card | 
+`POST` | `/api/user/comment/json` | Submit request to append comment to existing comment a user through jSON object | id, password and comment
+`ARTISAN COMMAND` | `append:comments {id} {comments}` | append comment to existing comment through artisan command | id and comment (eg php artisan append:comments 1 "Hello World")
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## Setup
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-### Premium Partners
+  #### Getting Started
+  - Open terminal and run the following commands
+    ```
+    $ git clone https://github.com/iJosef/pictureworkstest
+    $ cd pictureworkstest
+    $ composer install
+    ```
+    - copy .env.example and paste in .env file
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+    ```
+    $ php artisan key:generate
+    $ php artisan migrate --seed
+    $ php artisan serve
+    ```
+    If all goes well 
+  - Visit http://127.0.0.1:8000 on your browser to view laravel home
+  
+  if Seeding goes well, you should be able to start running the tests
+  ### User Static Password Value
+        720DF6C2482218518FA20FDC52D4DED7ECC043AB
+  ### Testing
+  ```
+  $ php artisan test
+  ```
+  If correctly setup, all tests should pass
+  
