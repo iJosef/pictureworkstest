@@ -18,15 +18,15 @@
                 @csrf
                 <div class="form-group">
                   <label for="user_id">User ID:</label>
-                  <input type="text" class="form-control" placeholder="Enter User ID" id="id" name="id">
+                  <input type="text" class="form-control" placeholder="Enter User ID" id="id" name="id" value="{{ old('id') }}">
                 </div>
                 <div class="form-group">
                   <label for="password">Password:</label>
-                  <input type="text" class="form-control" placeholder="Enter password" id="password" name="password">
+                  <input type="text" class="form-control" placeholder="Enter password" id="password" name="password" value="{{ old('password') }}">
                 </div>
                 <div class="form-group">
                     <label for="comment">Comment:</label>
-                    <textarea class="form-control" rows="5" id="comment" name="comment"></textarea>
+                    <textarea class="form-control" rows="5" id="comment" name="comment" value="">{!! old('comment') !!}</textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
