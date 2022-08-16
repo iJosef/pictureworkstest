@@ -28,7 +28,7 @@ Migration of a non-OO legacy application, including all logic, behavior and work
 
 ## Routes
 
-### Base URL = http://127.0.0.1/:8000/
+### Base URL = http://127.0.0.1:8000/
 Available routes and guide
 Method | Route | Description | Payload
 --- | --- | ---|---
@@ -56,7 +56,7 @@ These instructions will get you a copy of the project up and running on your loc
     $ php artisan serve
     ```
     If all goes well 
-  - Visit http://127.0.0.1/:8000 on your browser to view laravel home
+  - Visit http://127.0.0.1:8000 on your browser to view laravel home
   
   if Seeding goes well, you should also get an email in your mailHog for testing purpose
   ### User Static Password Value
