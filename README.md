@@ -58,7 +58,7 @@ These instructions will get you a copy of the project up and running on your loc
     If all goes well 
   - Visit http://127.0.0.1:8000 on your browser to view laravel home
   
-  if Seeding goes well, you should also get an email in your mailHog for testing purpose
+  if Seeding goes well, you should be able to start running the tests
   ### User Static Password Value
         720DF6C2482218518FA20FDC52D4DED7ECC043AB
   ### Testing
