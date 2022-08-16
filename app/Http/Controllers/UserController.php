@@ -74,7 +74,5 @@ class UserController extends Controller
             ];
             return response()->json($data, 400);
         }
-
-        // return response()->json($d, 200, $headers);
     }
 }

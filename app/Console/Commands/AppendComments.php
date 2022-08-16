@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Comment;
+use App\Models\User;
 use Illuminate\Console\Command;
 
 class AppendComments extends Command
@@ -28,11 +29,16 @@ class AppendComments extends Command
      */
     public function handle()
     {
-        $comment = Comment::findOrFail($this->argument('id'));
-        $current_comment = $comment->comment;
-        $new_comment = $current_comment ." ". $this->argument('comments');
-        $comment->comment = $new_comment;
-        $comment->update();
+        $user = User::findOrFail($this->argument('id'));
+        if ($user != null) {
+            $comment = Comment::where('user_id',$this->argument('id'))->first();
+            $current_comment = $comment->comment;
+            $new_comment = $current_comment ." ". $this->argument('comments');
+            $comment->comment = $new_comment;
+            $comment->update();
+        }
+
+
         return 0;
     }
 }
