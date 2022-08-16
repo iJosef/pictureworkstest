@@ -29,7 +29,7 @@ class AppendComments extends Command
      */
     public function handle()
     {
-        $user = User::findOrFail($this->argument('id'));
+        $user = User::where('id',$this->argument('id'))->first();
         if ($user != null) {
             $comment = Comment::where('user_id',$this->argument('id'))->first();
             $current_comment = $comment->comment;

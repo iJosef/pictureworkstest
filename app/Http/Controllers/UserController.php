@@ -26,7 +26,12 @@ class UserController extends Controller
     {
         $validator = $request->validated();
 
-        $user = User::findOrFail($request->id);
+        $user = User::where('id',$request->id)->first();
+
+        if ($user == null) {
+            return redirect()->back()->withErrors(['invalid user id'])->withInput();
+        }
+
         if (strtoupper($request->password) === $user->password) {
             $comment = Comment::where('user_id', $request->id)->first();
             $current_comment = $comment->comment;
@@ -39,7 +44,7 @@ class UserController extends Controller
             }
 
         } else {
-            return redirect()->back()->withErrors($validator)->withInput();
+            return redirect()->back()->withErrors('wrong password')->withInput();
         }
     }
 
@@ -47,7 +52,15 @@ class UserController extends Controller
     {
         $request->validated();
 
-        $user = User::findOrFail($request->id);
+        $user = User::where('id',$request->id)->first();
+
+        if (!$user) {
+            $data = [
+                'status' => 'error',
+                'message' => 'Invalid user id'
+            ];
+            return response()->json($data, 400);
+        }
 
         if ($request->password === $user->password) {
             $comment = Comment::where('user_id', $request->id)->first();
